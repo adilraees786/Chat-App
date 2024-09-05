@@ -3,10 +3,9 @@
 
 
 
-
 import React, { useState } from 'react';
 
-import { auth,db } from '../database/firebase.config';
+
 const LoginPage = () => {
   const [formData, setFormData] = useState({
     email: '',
