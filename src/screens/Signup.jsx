@@ -1,8 +1,4 @@
 
-        // <div className="">
-        //     <h1>SIGNUP SCREEN</h1>
-        // </div>\// src/SignupPage.jsx
-import { db,auth } from '../database/firebase.config';
 
 import React, { useState } from 'react';
 
@@ -16,6 +12,7 @@ const SignupPage = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+
   };
 
   const handleSubmit = (e) => {

@@ -1,17 +1,12 @@
-// export default function Login() {
-//     return(
-//         <div className="">
-//             <h1>LOGIN SCREEN</h1>
-//         </div>
-//     )
-// }
 
-// src/LoginPage.jsx
 
-import { db,auth } from '../database/firebase.config';
+
+
+
 
 import React, { useState } from 'react';
 
+import { auth,db } from '../database/firebase.config';
 const LoginPage = () => {
   const [formData, setFormData] = useState({
     email: '',
