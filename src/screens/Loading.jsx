@@ -1,30 +1,29 @@
-import { useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+
+// const Loading = () => {
+//     const navigate = useNavigate()
+
+//     useEffect(() => {
+//         checkUser()
+
+//     }, [])
+
+//     const checkUser = async () => {
+//         const userid = await localStorage.getItem('userid');
+//         if (userid)
+//             navigate('/home')
+//         else
+//             navigate('/login')
+
+//     }
+
+//     return(
+//         <div className=" min-h-screen flex items-center justify-center bg-white">
+//             <div className=" flex items-center space-x-2">
+
+//             </div>
+
+//         </div>
+//     )
 
 
-export default function Loading() {
-    const navigate = useNavigate()
-
-    useEffect(() => {
-        checkUser()
-    })
-
-    const checkUser = async () => {
-        const userUID = await localStorage.getItem('userId')
-
-        if (userUID !== null) 
-            navigate('/home')
-        else
-         navigate('/login')
-    }
-
-    return (
-        <div className="flex items-center justify-center h-screen bg-gray-100">
-            <div className="w-16 h-16 aspect-square flex justify-between">
-                <div className="w-5 h-full bg-black animate-bounce delay-75"></div>
-                <div className="w-5 h-full bg-black animate-bounce delay-[0.2s]"></div>
-                <div className="w-5 h-full bg-black animate-bounce delay-[0.35s]"></div>
-            </div>
-        </div>
-    )
-}
+// }

@@ -1,27 +1,61 @@
 
 
-
-
-
+import Swal from 'sweetalert2'
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { auth } from '../database/firebase.config';
+import {  signInWithEmailAndPassword } from 'firebase/auth';
+
 
 
 const LoginPage = () => {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+  const navigate = useNavigate()
 
-  const handleSubmit = (e) => {
+  // const [name, setname] = useState("");
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+
+  function handlesigin(e) {
     e.preventDefault();
-    // Handle form submission
-    console.log('Form data submitted:', formData);
-  };
+
+
+signInWithEmailAndPassword(auth, email, password)
+      .then( async (respnse) => {
+
+        const uid = respnse.user.uid
+
+     
+       localStorage.setItem("userid", uid)
+
+        
+
+        Swal.fire({
+          title: 'Login Completed',
+        
+          icon: 'success',
+
+        })
+
+        navigate('/home')
+      
+         
+    
+      })
+      .catch((error) => {
+        // const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorMessage, " ??? error message");
+
+        Swal.fire({
+          title: 'Something Went Wrong ',
+          text: error.Message,
+          confirmButtonText: 'error'
+        })
+        // ..
+      });
+
+  }
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-700">
@@ -33,12 +67,11 @@ const LoginPage = () => {
             Email
           </label>
           <input
-            id="email"
-            name="email"
+            
             type="email"
             placeholder="Enter your email"
-            value={formData.email}
-            onChange={handleChange}
+           
+            onChange={e => setemail(e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
             required
           />
@@ -48,18 +81,19 @@ const LoginPage = () => {
             Password
           </label>
           <input
-            id="password"
+           
             name="password"
             type="password"
             placeholder="Enter your password"
-            value={formData.password}
-            onChange={handleChange}
+           
+            onChange={e => setpassword(e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
             required
           />
         </div>
         <button
           type="submit"
+          onClick={handlesigin}
           className="w-full bg-indigo-500 text-white py-2 px-4 rounded-md shadow-sm hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
         >
           Login

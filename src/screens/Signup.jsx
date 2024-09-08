@@ -12,7 +12,7 @@ const SignupPage = (props) => {
   const [name, setname] = useState("");
   const [email, setemail] = useState(""); // email for read & set email for write in useState
   const [password, setpassword] = useState("");
-  const [isloading, setisloading] = useState("");
+  // const [isloading, setisloading] = useState("");
 
 
    function handlesignup(e) {
@@ -26,8 +26,13 @@ const SignupPage = (props) => {
       .then( async (respnse) => {
 
         const uid = respnse.user.uid
+        const userData={ name , email, password , uid}
 
-        const userData ={name, email, uid}
+        localStorage.setItem("userId", respnse.user.uid)
+
+        //set loading
+
+    
 
          await setDoc (doc(db, 'user' , uid ), userData)
 
@@ -38,14 +43,14 @@ const SignupPage = (props) => {
 
         })
 
-        navigate('/home')
+        navigate('/login')
       
          
     
       })
       .catch((error) => {
         // const errorCode = error.code;
-        // const errorMessage = error.message;
+        const errorMessage = error.message;
         alert(errorMessage, " ??? error message");
 
         Swal.fire({
@@ -59,23 +64,6 @@ const SignupPage = (props) => {
   }
 
 
-  // const [formData, setFormData] = useState({
-  //   name: '',
-  //   email: '',
-  //   password: '',
-  // });
-
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData({ ...formData, [name]: value });
-
-  // };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   // Handle form submission
-  //   console.log('Form data submitted:', formData);
-  // };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
