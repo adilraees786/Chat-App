@@ -29,8 +29,15 @@ export default function Home() {
     return (
         <div>
             <div className="bg-[skyblue]  w-full p-10">
-<h1 className=" text-2xl font-bold text-blue-800">User List</h1>
+                <h1 className=" text-2xl font-bold text-blue-800">User List</h1>
             </div>
+
+            {users.map(item => (
+                <div className="w-11/12 shadow-md shadow-gray-500 rounded-md mx-auto py-5 px-10">
+                    {item.name}
+                </div>
+
+            ))}
         </div>
     )
 
