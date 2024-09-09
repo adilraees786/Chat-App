@@ -4,7 +4,7 @@ import Swal from 'sweetalert2'
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../database/firebase.config';
-import {  signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 
 
@@ -20,27 +20,20 @@ const LoginPage = () => {
     e.preventDefault();
 
 
-signInWithEmailAndPassword(auth, email, password)
-      .then( async (respnse) => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then(async (respnse) => {
 
         const uid = respnse.user.uid
 
-     
-       localStorage.setItem("userid", uid)
 
-        //here loadindg
+        localStorage.setItem("userid", uid)
+        Swal.fire(
+          'Login Completed!',
+          navigate('/home')
+          // is setloading(false)
+        )
 
-        Swal.fire({
-          title: 'Login Completed',
-        
-          icon: 'success',
 
-        })
-
-        navigate('/home')
-      
-         
-    
       })
       .catch((error) => {
         // const errorCode = error.code;
@@ -67,10 +60,10 @@ signInWithEmailAndPassword(auth, email, password)
             Email
           </label>
           <input
-            
+
             type="email"
             placeholder="Enter your email"
-           
+
             onChange={e => setemail(e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
             required
@@ -81,11 +74,11 @@ signInWithEmailAndPassword(auth, email, password)
             Password
           </label>
           <input
-           
+
             name="password"
             type="password"
             placeholder="Enter your password"
-           
+
             onChange={e => setpassword(e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
             required
