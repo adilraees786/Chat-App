@@ -28,7 +28,7 @@ signInWithEmailAndPassword(auth, email, password)
      
        localStorage.setItem("userid", uid)
 
-        
+        //here loadindg
 
         Swal.fire({
           title: 'Login Completed',
