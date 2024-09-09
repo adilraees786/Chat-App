@@ -1,16 +1,16 @@
 
 
 import NotFound from "./screens/Notfound";
-// import Loading from "./screens/Loading";
 import Login from "./screens/Login";
 import Signup from "./screens/Signup";
+// import Loading from "./screens/Loading";
 import Home from "./screens/Home";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 export default function App() {
   const router = createBrowserRouter([
-    { path: "*", element: <NotFound/>, },
     // { path: "/loading", element: <Loading/>, },
+    { path: "*", element: <NotFound/>, },
     { path: "/home", element: <Home/>, },
     { path: "/login", element: <Login/>, },
     { path: "/signup", element: <Signup/>, },
