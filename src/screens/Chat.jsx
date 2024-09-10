@@ -1,7 +1,9 @@
-import { collection, getDocs } from "firebase/firestore";
+
 import { useEffect, useState } from "react";
 import { db } from "../database/firebase.Config";
 import { useLocation, useNavigate } from "react-router-dom";
+import { addDoc, collection, query, where, onSnapshot } from "firebase/firestore";
+
 
 
 
@@ -9,21 +11,47 @@ export default function Chat() {
     const [messages, setMessages] = useState([])
     const navigate = useNavigate()
     const { state } = useLocation()
-
-    console.log("=== ==>~ home~", state);
-
-
-
-
+    const { sendmsgs, setsendmsgs } = useState()
+    const { Chatlist, setChatlist } = useState()
+   
     useEffect(() => {
         getMessages()
 
+        const q = query(collection(db, "chat"), where(state.uid, "==", true), where(state.myuid, "==", true));
+        const unsubscribe = onSnapshot(q, (docSnap) => {
+            const list = [];
+            docSnap.forEach((doc) => {
+                list.push(doc.data());
+            });
+            console.log("===unsub:", list);
+            
+            setChatlist(list)
+        });
+    
+
+        return ()=> unsubscribe();
+
     }, [])
+
+
+
+
 
     const getMessages = async () => {
 
 
 
+        const sendmsgs = async () => {
+        
+
+            addDoc(collection(db, "chat"), {
+                messages,
+                myUid: true,
+                [state.uid]: true,
+                createAt: Date.now()
+            })
+        }
+        setMessages("")
 
     }
 
@@ -40,13 +68,27 @@ export default function Chat() {
                 <h1 className=" text-2xl font-bold  text-white">Chat With {/** state.name */}</h1>
             </div>
 
-<div className=" bg-gray-100 h-[80vh]">
 
-</div>
+            <div className=" bg-gray-100 h-[80vh]">
+                {Chatlist.map((item, index) => (
+
+                    <div key={index} onClick={() => navigate('/chat', { state: { ...item, myUid } })} className=" cursor-pointer w-11/12 shadow-md border border-black bg-blue-50 shadow-gray-300 rounded-md mx-auto py-5 px-10 flex justify-between">
+                        <div className="flex items-center">
+
+                            <div>
+                                <h1 className="  font-semibold text-xl">{item.messages}</h1>
+
+                            </div>
+                        </div>
+
+                    </div>
+                ))}
+
+            </div>
 
             <div className="flex items-center  justify-center pt-5">
-                <input type="text" placeholder="Enter Message" className="w-10/12 border-gray-500 rounded-lg px-6 py-2 text-xl " />
-                <button className="text-xl w-40 ml-2 rounded-lg bg-red-200 "> Send</button>
+                <input value={messages} onChange={e => setMessages(e.target.value)} placeholder="Enter Message" className="w-10/12 border-gray-500 rounded-lg px-6 py-2 text-xl " />
+                <button onClick={sendmsgs} className="text-xl w-40 ml-2 rounded-lg bg-red-200 "> Send</button>
             </div>
 
         </div>
