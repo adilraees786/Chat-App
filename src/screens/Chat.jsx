@@ -23,9 +23,9 @@ export default function Chat() {
             docSnap.forEach((doc) => {
                 list.push(doc.data());
             });
-            console.log("===unsub:", list);
+           const sortList =list.sort((a,b => a.createAt - b.createAt))
             
-            setChatlist(list)
+            setChatlist(sortList)
         });
     
 
@@ -46,8 +46,9 @@ export default function Chat() {
 
             addDoc(collection(db, "chat"), {
                 messages,
-                myUid: true,
                 [state.uid]: true,
+                [state.myUid]:true,
+                senerUid: state.myuid,
                 createAt: Date.now()
             })
         }
@@ -72,15 +73,16 @@ export default function Chat() {
             <div className=" bg-gray-100 h-[80vh]">
                 {Chatlist.map((item, index) => (
 
-                    <div key={index} onClick={() => navigate('/chat', { state: { ...item, myUid } })} className=" cursor-pointer w-11/12 shadow-md border border-black bg-blue-50 shadow-gray-300 rounded-md mx-auto py-5 px-10 flex justify-between">
+                    <div key={index} onClick={() => navigate('/chat', { state: { ...item, myUid } })} className={` w-full flex px-10  ${item.senerUid ==state.myUid ? 'justify-end':'justify-start' }`}>
                         <div className="flex items-center">
 
-                            <div>
+                            <div className="cursor-pointer w-11/12 shadow-md border border-black bg-blue-50 shadow-gray-300 rounded-md mt-4 py-5 px-10 ">
                                 <h1 className="  font-semibold text-xl">{item.messages}</h1>
+                                <h1 className="   text-xl">{new Date(item.createAt).toDateString()}</h1>
 
                             </div>
                         </div>
-
+ 
                     </div>
                 ))}
 
