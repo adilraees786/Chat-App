@@ -2,6 +2,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../database/firebase.Config";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 
 
@@ -49,11 +50,12 @@ export default function Chatlist() {
 
     return (
         <div>
-            <div className="bg-[skyblue]  w-full p-6 mb-16   text-2xl font-bold text-white flex justify-between ">
+            {/* <div className="bg-[skyblue]  w-full p-6 mb-16   text-2xl font-bold text-white flex justify-between ">
                 <h1>User List</h1>
                 <button onClick={handlelogout}>Logout</button>
 
-            </div>
+            </div> */}
+            
 
             
             {users.map((item, idx) => (
