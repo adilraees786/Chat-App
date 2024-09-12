@@ -70,7 +70,7 @@ export default function Chat() {
             </div>
 
 
-            <div className=" bg-gray-100 h-[80vh]">
+            {/* <div className=" bg-gray-100 h-[80vh]">
                 {Chatlist.map((item, index) => (
 
                     <div key={index} onClick={() => navigate('/chat', { state: { ...item, myUid } })} className={` w-full flex px-10  ${item.senerUid ==state.myUid ? 'justify-end':'justify-start' }`}>
@@ -86,7 +86,7 @@ export default function Chat() {
                     </div>
                 ))}
 
-            </div>
+            </div> */}
 
             <div className="flex items-center  justify-center pt-5">
                 <input value={messages} onChange={e => setMessages(e.target.value)} placeholder="Enter Message" className="w-10/12 border-gray-500 rounded-lg px-6 py-2 text-xl " />
@@ -97,4 +97,3 @@ export default function Chat() {
 
     )
 }
-

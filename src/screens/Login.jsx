@@ -38,7 +38,7 @@ const LoginPage = () => {
       .catch((error) => {
         // const errorCode = error.code;
         const errorMessage = error.message;
-        alert(errorMessage, " ??? error message");
+      
 
         Swal.fire({
           title: 'Something Went Wrong ',
