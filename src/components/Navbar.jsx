@@ -19,9 +19,10 @@ import {Link, useNavigate } from "react-router-dom";
 
                 <div className=" flex gap-16 cursor-pointer" >
 
+                <Link to={'/'}>Home</Link>
                   <Link to={'/chatlist'}>Chat</Link>
                   <Link to={'/Location'}>Location</Link>
-                  <Link to={'/MarketPlace'}>MarketPlace</Link>
+                  <Link to={'/marketPlace'}>MarketPlace</Link>
                   <Link to={'/Profile'}>Profile</Link>
                  
                 </div>

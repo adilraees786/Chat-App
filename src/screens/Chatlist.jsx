@@ -55,7 +55,8 @@ export default function Chatlist() {
                 <button onClick={handlelogout}>Logout</button>
 
             </div> */}
-            
+          
+          <Navbar/>  
 
             
             {users.map((item, idx) => (
