@@ -99,11 +99,13 @@
 // }
 
 
-// import moment from "moment";
+
 import { useEffect, useState } from "react";
-import { db } from "../database/firebase.config";
+import { db } from "../database/firebase.Config";
 import { useLocation, useNavigate } from "react-router-dom";
 import { addDoc, collection, query, where, onSnapshot } from "firebase/firestore";
+// import moment from "moment";
+
 
 export default function Home() {
     const navigate = useNavigate()
@@ -142,7 +144,9 @@ export default function Home() {
 
     return (
         <div>
+          
             <div className="bg-[#0f546f] w-full p-6 flex items-center uppercase">
+                
                 <img src="https://cdn-icons-png.freepik.com/256/10117/10117587.png?semt=ais_hybrid" alt="" className="w-10 mr-10 cursor-pointer" onClick={() => navigate('/home')} />
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjtNBgCacCwHhxVPj1ubPRygdT7X_7w_UrLQ&s" alt="" className="w-10 mr-4 rounded-full" />
                 <h1 className="text-2xl font-bold text-white">{state.name}</h1>

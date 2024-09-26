@@ -10,6 +10,7 @@ import Navbar from "./components/Navbar"
 import Location from "./screens/Location"
 import Marketplace from "./screens/Marketplace"
 import Cards from "./components/Cards"
+import Profile from "./screens/Profile"
 
 
 
@@ -18,7 +19,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 export default function App() {
   const router = createBrowserRouter([
-    { path: "/loading", element: <Loading/>, },
+    { path: "/", element: <Loading/>, },
     { path: "*", element: <NotFound/>, },
     { path: "/home", element: <Home/>, },
     { path: "/chat", element: <Chat/>, },
@@ -29,6 +30,7 @@ export default function App() {
     { path: "/cards", element: <Cards/>, },
     { path: "/navbar", element: <Navbar/>, },
     { path: "/marketplace", element: <Marketplace/>, },
+    { path: "/profile", element: <Profile/>, },
 
   
   ]);
